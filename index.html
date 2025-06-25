@@ -1,38 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-   <meta charset="utf-8">
+   <meta charset="utf-g">
    <meta content="width=device-width,initial-scale=1" name="viewport">
    <title>WEB ALFA OFFICIAL</title>
    <meta content="ALFA OFFICIAL menyediakan kebutuhan hosting" name="description">
    <meta content="jasa install panel,jasa install tehma,bot whatsapp, vps, panel, ALFA OFFICIAL" name="keywords">
+   
+   <!-- Memanggil file CSS lokal Anda -->
+   <link href="style.css" rel="stylesheet">
+
    <link href="https://telegra.ph/file/03478fe1432d994cd1dcd.jpg" rel="icon">
    <link href="https://telegra.ph/file/03478fe1432d994cd1dcd.jpg" rel="apple-touch-icon">
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-   <link href="https://api.zeeoneofc.my.id/aos/aos.css" rel="stylesheet">
-   <link href="https://api.zeeoneofc.my.id/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   
+   <!-- LINK KE API.ZEEONEOFC TELAH DIHAPUS SEPERTI PERMINTAAN ANDA -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-   <link href="https://api.zeeoneofc.my.id/boxicons/css/boxicons.min.css" rel="stylesheet">
-   <link href="https://api.zeeoneofc.my.id/glightbox/css/glightbox.min.css" rel="stylesheet">
-   <link href="https://api.zeeoneofc.my.id/remixicon/remixicon.css" rel="stylesheet">
-   <link href="https://api.zeeoneofc.my.id/swiper/swiper-bundle.min.css" rel="stylesheet">
-   <link href="https://api.zeeoneofc.my.id/css/style.min.css" rel="stylesheet">
    <link rel="shortcut icon" href="https://telegra.ph/file/03478fe1432d994cd1dcd.jpg">
-   <style>
-     .qris-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); padding-top: 50px; }
-     .qris-modal-content { background-color: #1a1a1a; color: #fff; margin: 5% auto; padding: 25px; border: 1px solid #444; width: 90%; max-width: 420px; border-radius: 10px; text-align: center; box-shadow: 0 5px 25px rgba(0,0,0,0.5); font-family: "Poppins", sans-serif; }
-     .qris-modal-content h2, .qris-modal-content h3 { font-weight: 700; margin-bottom: 15px; }
-     .qris-modal-content .btn-modal { background: #0d6efd; border: 0; padding: 12px 24px; color: #fff; transition: 0.4s; border-radius: 50px; cursor: pointer; width: 100%; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; }
-     .qris-modal-content .btn-modal:hover { background: #0b5ed7; }
-     .qris-modal-content .btn-modal.batal { background: #6c757d; }
-     .qris-modal-content .btn-modal.batal:hover { background: #5c636a; }
-     .qris-modal-content .btn-modal.whatsapp { background: #25D366; }
-     .qris-modal-content .btn-modal.whatsapp:hover { background: #1da851; }
-     #qrisImage { max-width: 80%; height: auto; margin: 20px 0; border-radius: 8px; background-color: white; padding: 5px; }
-     #paymentInfo, #suksesInfo { text-align: left; line-height: 1.9; margin: 20px 0; font-size: 15px; }
-     .hidden { display: none; }
-     .btn-buy-qris { cursor: pointer; }
-   </style>
  </head>
  <body>
    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
@@ -120,9 +104,9 @@
        </div>
        <div id="qrisArea" class="hidden">
          <h3>Scan untuk Membayar</h3>
-         <p>Silakan scan QR Code di bawah ini</p>
-         <img id="qrisImage" src="https://placehold.co/250x250/ffffff/000000?text=Loading..." alt="QRIS Code">
-         <div id="paymentInfo"></div>
+         <p id="loadingText">Membuat permintaan pembayaran...</p>
+         <img id="qrisImage" src="" class="hidden" alt="QRIS Code">
+         <div id="paymentInfo" class="hidden"></div>
        </div>
        <div id="suksesArea" class="hidden">
          <h2>Pembayaran Berhasil!</h2>
@@ -136,13 +120,10 @@
    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i></a>
    <div id="preloader"></div>
    
-   <!-- Script Bawaan -->
-   <script src="https://api.zeeoneofc.my.id/aos/aos.js"></script>
-   <script src="https://api.zeeoneofc.my.id/bootstrap/js/bootstrap.bundle.min.js"></script>
-   <script src="https://api.zeeoneofc.my.id/js/main.min.js"></script>
+   <!-- SCRIPT DARI PIHAK KETIGA TELAH DIHAPUS, HANYA FONT AWESOME UNTUK ICON -->
    <script src="https://kit.fontawesome.com/32db8fe470.js" crossorigin="anonymous"></script>
 
-   <!-- MEMANGGIL FILE JAVASCRIPT EKSTERNAL -->
+   <!-- MEMANGGIL FILE JAVASCRIPT LOKAL ANDA -->
    <script src="script.js" defer></script>
 
  </body>
