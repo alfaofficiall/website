@@ -185,4 +185,84 @@
 
            document.getElementById('detailProduk').innerHTML = `<p style="font-size:1.1em;"><strong>Produk:</strong><br>${produk}</p><h3 style="margin-top: 20px;">Harga: Rp ${harga.toLocaleString('id-ID')}</h3>`;
            tampilkanArea('konfirmasiArea');
-           modal.style.display = "fle
+           modal.style.display = "flex";
+         };
+       });
+       tombolBatal.forEach(tombol => tombol.onclick = tutupModal);
+       function tutupModal() {
+           modal.style.display = "none";
+           if (pembayaranAktif.interval) clearInterval(pembayaranAktif.interval);
+           pembayaranAktif.status = false;
+       }
+       function tampilkanArea(namaArea) {
+           ['konfirmasiArea', 'qrisArea', 'suksesArea'].forEach(id => { document.getElementById(id).classList.add('hidden'); });
+           document.getElementById(namaArea).classList.remove('hidden');
+       }
+
+       // --- Logika Pembayaran ---
+       document.getElementById('lanjutBayarBtn').onclick = async function () {
+         tampilkanArea('qrisArea');
+         
+         const { apikey, qrisCode } = SETTINGS.QRIS;
+         // INI MEMANGGIL LANGSUNG KE API ANDA, TANPA BACKEND
+         const apiUrl = `https://alfaofficial.cloud/orderkuota/createpayment?apikey=${apikey}&amount=${pembayaranAktif.amount}&codeqr=${qrisCode}`;
+
+         try {
+           const res = await fetch(apiUrl);
+           const json = await res.json();
+           if (!json?.result?.idtransaksi || !json?.result?.imageqris?.url) throw new Error('Respons API tidak lengkap.');
+           
+           const data = json.result;
+           pembayaranAktif.status = true;
+           pembayaranAktif.transactionId = data.idtransaksi;
+           
+           document.getElementById("qrisImage").src = data.imageqris.url;
+           document.getElementById("paymentInfo").innerHTML = `<strong>Produk:</strong> ${pembayaranAktif.produk}<br><strong>ID Transaksi:</strong> ${data.idtransaksi}<br><strong>Jumlah:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}`;
+           
+           pembayaranAktif.interval = setInterval(cekStatusPembayaran, SETTINGS.CHECK_INTERVAL_MS);
+         } catch (err) {
+           console.error("Error:", err);
+           alert('Gagal membuat pembayaran. Cek konsol (F12) untuk error CORS. Anda sebagai pemilik API harus memperbaiki ini di server Anda.');
+           tutupModal();
+         }
+       };
+
+       // --- LOGIKA CEK STATUS SESUAI BOT ANDA ---
+       async function cekStatusPembayaran() {
+         if (!pembayaranAktif.status || pembayaranAktif.isPaid) return clearInterval(pembayaranAktif.interval);
+
+         const { apikey, merchantId, keyorkut } = SETTINGS.QRIS;
+         // URL ini tidak memerlukan ID transaksi, persis seperti bot Anda
+         const apiUrl = `https://alfaofficial.cloud/orderkuota/cekstatus?apikey=${apikey}&merchant=${merchantId}&keyorkut=${keyorkut}`;
+
+         try {
+           const res = await fetch(apiUrl);
+           const json = await res.json();
+           
+           // Mengecek dengan cara mencocokkan JUMLAH UANG
+           if (json?.result && json.result.amount == pembayaranAktif.amount) {
+             if (pembayaranAktif.status && !pembayaranAktif.isPaid) {
+                 console.log("Transaksi dengan jumlah yang cocok ditemukan! Menganggap pembayaran berhasil.");
+                 
+                 pembayaranAktif.isPaid = true; // Tandai sudah lunas agar tidak dicek lagi
+                 pembayaranAktif.status = false;
+                 clearInterval(pembayaranAktif.interval);
+                 
+                 tampilkanArea('suksesArea');
+                 document.getElementById("suksesInfo").innerHTML = `<strong>Produk:</strong> ${pembayaranAktif.produk}<br><strong>ID Transaksi:</strong> ${pembayaranAktif.transactionId}<br><strong>Jumlah Dibayar:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}`;
+
+                 const pesanWA = `Halo Admin, saya telah berhasil melakukan pembayaran untuk:\n\nProduk: *${pembayaranAktif.produk}*\nID Transaksi: *${pembayaranAktif.transactionId}*\nJumlah: *Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}*\n\nMohon untuk segera diproses. Terima kasih.`;
+                 const urlWA = `https://wa.me/${SETTINGS.NOMOR_ADMIN_WA}?text=${encodeURIComponent(pesanWA)}`;
+                 document.getElementById('kirimBuktiBtn').onclick = () => window.open(urlWA, '_blank');
+             }
+           } else {
+             console.log(`Mencari transaksi dengan jumlah Rp ${pembayaranAktif.amount}... Belum ditemukan.`);
+           }
+         } catch (err) {
+           console.error("Gagal cek status:", err);
+         }
+       }
+   </script>
+
+ </body>
+</html>
