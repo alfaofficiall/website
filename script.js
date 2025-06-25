@@ -1,6 +1,6 @@
- // --- PENGATURAN ---
+// --- PENGATURAN ---
 const SETTINGS = {
-  NOMOR_ADMIN_WA: "6282226769163" // Ganti dengan nomor WhatsApp Anda
+  NOMOR_ADMIN_WA: "6282226769163"
 };
 
 let pembayaranAktif = { status: false, amount: 0, transactionId: null, produk: null, interval: null };
@@ -50,7 +50,8 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
   document.getElementById('qrisImage').classList.add('hidden');
   document.getElementById('paymentInfo').classList.add('hidden');
 
-  // PENTING: URL ini sekarang memanggil file backend Node.js di Vercel
+  // INI BAGIAN PENTING YANG DIUBAH UNTUK MENGATASI CORS
+  // Kita memanggil file backend JAVASCRIPT, BUKAN PHP
   const apiUrl = `/api/create-payment?amount=${pembayaranAktif.amount}`;
 
   try {
@@ -77,8 +78,8 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
     
     pembayaranAktif.interval = setInterval(cekStatusPembayaran, 5000);
   } catch (err) {
-    console.error("Error saat membuat pembayaran:", err);
-    document.getElementById('loadingText').innerHTML = 'Gagal membuat pembayaran. Silakan coba lagi.';
+    console.error("Error:", err);
+    document.getElementById('loadingText').innerHTML = 'Gagal membuat pembayaran.';
     setTimeout(tutupModal, 3000);
   }
 };
@@ -86,7 +87,7 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
 async function cekStatusPembayaran() {
   if (!pembayaranAktif.status) return clearInterval(pembayaranAktif.interval);
 
-  // PENTING: URL ini juga memanggil file backend Node.js di Vercel
+  // PENTING: URL ini juga memanggil file backend JAVASCRIPT
   const apiUrl = `/api/check-status?idtransaksi=${pembayaranAktif.transactionId}`;
 
   try {
@@ -107,7 +108,6 @@ async function cekStatusPembayaran() {
       const pesanWA = `Halo Admin, saya telah berhasil melakukan pembayaran untuk:\n\nProduk: *${pembayaranAktif.produk}*\nID Transaksi: *${pembayaranAktif.transactionId}*\nJumlah: *Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}*\n\nMohon untuk segera diproses. Terima kasih.`;
       const urlWA = `https://wa.me/${SETTINGS.NOMOR_ADMIN_WA}?text=${encodeURIComponent(pesanWA)}`;
       document.getElementById('kirimBuktiBtn').onclick = () => window.open(urlWA, '_blank');
-
     } else {
       console.log("Menunggu pembayaran...");
     }
