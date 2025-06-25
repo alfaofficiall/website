@@ -7,7 +7,7 @@
    <meta content="ALFA OFFICIAL menyediakan kebutuhan hosting" name="description">
    <meta content="jasa install panel,jasa install tehma,bot whatsapp, vps, panel, ALFA OFFICIAL" name="keywords">
    
-   <!-- CSS Asli Website Anda -->
+   <!-- CSS Asli Website Anda SAYA KEMBALIKAN SEMUA -->
    <link href="https://telegra.ph/file/03478fe1432d994cd1dcd.jpg" rel="icon">
    <link href="https://telegra.ph/file/03478fe1432d994cd1dcd.jpg" rel="apple-touch-icon">
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -20,6 +20,21 @@
    <link href="https://api.zeeoneofc.my.id/swiper/swiper-bundle.min.css" rel="stylesheet">
    <link href="https://api.zeeoneofc.my.id/css/style.min.css" rel="stylesheet">
    <link rel="shortcut icon" href="https://telegra.ph/file/03478fe1432d994cd1dcd.jpg">
+   
+   <!-- CSS UNTUK POP-UP PEMBAYARAN SESUAI CONTOH ANDA -->
+   <style>
+     .payment-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; padding: 20px;}
+     .payment-container { font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 400px; background: rgba(15,12,41,0.9); padding: 30px; border-radius: 15px; box-shadow: 0 0 20px #0ff; border: 1px solid #0ff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+     .payment-container h2, .payment-container h3 { margin-bottom: 20px; }
+     .payment-container .btn-modal { background: #0ff; color: #000; padding: 10px 20px; border: none; margin: 10px 0; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; }
+     .payment-container .btn-modal:hover { background: #00faff; box-shadow: 0 0 10px #00faff; }
+     .payment-container .btn-modal.whatsapp { background: #25D366; color: #fff; }
+     .payment-container .btn-modal.whatsapp:hover { background: #1da851; }
+     #qrisImage { max-width: 100%; margin: 20px 0; border-radius: 12px; border: 2px solid #0ff; }
+     #paymentInfo, #suksesInfo, #detailProduk { margin-top: 10px; line-height: 1.8; text-align: left; }
+     .hidden { display: none; }
+     .btn-buy-qris { cursor: pointer; }
+   </style>
  </head>
  <body>
    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
@@ -31,7 +46,7 @@
            <ul>
                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                <li><a class="nav-link scrollto" href="#pricing">Produk</a></li>
-               <li><a class="nav-link" href="riwayat.html">Riwayat</a></li>
+               <li><a class="nav-link" href="#">Riwayat</a></li>
                <li><a class="nav-link" href="#">Login</a></li>
            </ul>
            <i class="bi bi-list mobile-nav-toggle"></i>
@@ -50,40 +65,40 @@
              <center><p>VPS</p></center>
            </div>
            <div class="row" data-aos="fade-left">
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC</h3><h4><sup>Rp</sup>15.000,-</h4><ul><li>1GB RAM</li><li>1CORE CPU</li><li>20GB DISK</li><li>1TB BANDWIDTH</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=VPS%20BASIC%201GB&harga=15000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC</h3><h4><sup>Rp</sup>25.000,-</h4><ul><li>2GB RAM</li><li>1CORE CPU</li><li>50GB DISK</li><li>2TB BANDWIDTH</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=VPS%20BASIC%202GB&harga=25000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC</h3><h4><sup>Rp</sup>30.000,-</h4><ul><li>2GB RAM</li><li>2CORE CPU</li><li>50GB DISK</li><li>2TB BANDWIDTH</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=VPS%20BASIC%202GB%202CORE&harga=30000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="200"><h3>Standard</h3><h4><sup>Rp</sup>35.000,-</h4><ul><li>4GB RAM</li><li>2CORE CPU</li><li>80GB DISK</li><li>4TB BANDWIDTH</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=VPS%20Standard%204GB&harga=35000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="300"><h3>Hight</h3><h4><sup>Rp</sup>45.000,-</h4><ul><li>8GB RAM</li><li>4CORE CPU</li><li>160GB DISK</li><li>5TB BANDWIDTH</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=VPS%20Hight%208GB&harga=45000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="300"><h3>Hight</h3><h4><sup>Rp</sup>70.000,-</h4><ul><li>16GB RAM</li><li>4CORE CPU</li><li>240GB DISK</li><li>5TB BANDWIDTH</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=VPS%20Hight%2016GB&harga=70000" class="btn-buy">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC</h3><h4><sup>Rp</sup>15.000,-</h4><ul><li>1GB RAM</li><li>1CORE CPU</li><li>20GB DISK</li><li>1TB BANDWIDTH</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="VPS BASIC 1GB" data-harga="15000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC</h3><h4><sup>Rp</sup>25.000,-</h4><ul><li>2GB RAM</li><li>1CORE CPU</li><li>50GB DISK</li><li>2TB BANDWIDTH</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="VPS BASIC 2GB" data-harga="25000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC</h3><h4><sup>Rp</sup>30.000,-</h4><ul><li>2GB RAM</li><li>2CORE CPU</li><li>50GB DISK</li><li>2TB BANDWIDTH</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="VPS BASIC 2GB 2CORE" data-harga="30000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="200"><h3>Standard</h3><h4><sup>Rp</sup>35.000,-</h4><ul><li>4GB RAM</li><li>2CORE CPU</li><li>80GB DISK</li><li>4TB BANDWIDTH</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="VPS Standard 4GB" data-harga="35000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="300"><h3>Hight</h3><h4><sup>Rp</sup>45.000,-</h4><ul><li>8GB RAM</li><li>4CORE CPU</li><li>160GB DISK</li><li>5TB BANDWIDTH</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="VPS Hight 8GB" data-harga="45000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="300"><h3>Hight</h3><h4><sup>Rp</sup>70.000,-</h4><ul><li>16GB RAM</li><li>4CORE CPU</li><li>240GB DISK</li><li>5TB BANDWIDTH</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="VPS Hight 16GB" data-harga="70000">BELI</a></div></div></div>
            </div>
          </div>
          <div class="container mt-4">
            <div class="section-title" data-aos="fade-up"><center><p>PANEL</p></center></div>
            <div class="row" data-aos="fade-left">
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC 1</h3><h4><sup>Rp</sup>1.000,-</h4><ul><li>1GB RAM</li><li>35% CPU</li><li>1GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%201&harga=1000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="200"><h3>BASIC 2</h3><h4><sup>Rp</sup>2.000,-</h4><ul><li>2GB RAM</li><li>50% CPU</li><li>2GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%202&harga=2000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="300"><h3>BASIC 3</h3><h4><sup>Rp</sup>3.000,-</h4><ul><li>3GB RAM</li><li>95% CPU</li><li>3GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%203&harga=3000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="400"><h3>BASIC 4</h3><h4><sup>Rp</sup>4.000,-</h4><ul><li>4GB RAM</li><li>110% CPU</li><li>4GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%204&harga=4000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 5</h3><h4><sup>Rp</sup>5.000,-</h4><ul><li>5GB RAM</li><li>135% CPU</li><li>5GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%205&harga=5000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 6</h3><h4><sup>Rp</sup>6.000,-</h4><ul><li>6GB RAM</li><li>160% CPU</li><li>6GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%206&harga=6000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 7</h3><h4><sup>Rp</sup>7.000,-</h4><ul><li>7GB RAM</li><li>185% CPU</li><li>7GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%207&harga=7000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 8</h3><h4><sup>Rp</sup>8.000,-</h4><ul><li>8GB RAM</li><li>200% CPU</li><li>8GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%208&harga=8000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 9</h3><h4><sup>Rp</sup>9.000,-</h4><ul><li>9GB RAM</li><li>300% CPU</li><li>9GB DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20BASIC%209&harga=9000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="600"><span class="advanced">Recommend</span><h3>PREMIUM 1</h3><h4><sup>Rp</sup>10.000,-</h4><ul><li>UNLIMITED RAM</li><li>UNLIMITED CPU</li><li>UNLIMITED DISK</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20PREMIUM%201&harga=10000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 2</h3><h4><sup>Rp</sup>15.000,-</h4><ul><li>RESELLER PANEL</li><li>BISA OPEN JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20PREMIUM%202&harga=15000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 3</h3><h4><sup>Rp</sup>20.000,-</h4><ul><li>ADMIN PANEL</li><li>BISA OPEN RESELLER PANEL</li><li>BISA JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20PREMIUM%203&harga=20000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 4</h3><h4><sup>Rp</sup>25.000,-</h4><ul><li>OWNER PANEL</li><li>BISA OPEN ADMIN PANEL</li><li>BISA OPEN RESELLER PANEL</li><li>BISA JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20PREMIUM%204&harga=25000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 5</h3><h4><sup>Rp</sup>35.000,-</h4><ul><li>PT PANEL</li><li>BISA OPEN OWNER PANEL</li><li>BISA OPEN ADMIN PANEL</li><li>BISA OPEN RESELLER PANEL</li><li>BISA JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a href="pembayaran.html?produk=PANEL%20PREMIUM%205&harga=35000" class="btn-buy">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASIC 1</h3><h4><sup>Rp</sup>1.000,-</h4><ul><li>1GB RAM</li><li>35% CPU</li><li>1GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 1" data-harga="1000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="200"><h3>BASIC 2</h3><h4><sup>Rp</sup>2.000,-</h4><ul><li>2GB RAM</li><li>50% CPU</li><li>2GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 2" data-harga="2000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="300"><h3>BASIC 3</h3><h4><sup>Rp</sup>3.000,-</h4><ul><li>3GB RAM</li><li>95% CPU</li><li>3GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 3" data-harga="3000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="400"><h3>BASIC 4</h3><h4><sup>Rp</sup>4.000,-</h4><ul><li>4GB RAM</li><li>110% CPU</li><li>4GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 4" data-harga="4000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 5</h3><h4><sup>Rp</sup>5.000,-</h4><ul><li>5GB RAM</li><li>135% CPU</li><li>5GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 5" data-harga="5000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 6</h3><h4><sup>Rp</sup>6.000,-</h4><ul><li>6GB RAM</li><li>160% CPU</li><li>6GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 6" data-harga="6000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 7</h3><h4><sup>Rp</sup>7.000,-</h4><ul><li>7GB RAM</li><li>185% CPU</li><li>7GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 7" data-harga="7000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 8</h3><h4><sup>Rp</sup>8.000,-</h4><ul><li>8GB RAM</li><li>200% CPU</li><li>8GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 8" data-harga="8000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><h3>BASIC 9</h3><h4><sup>Rp</sup>9.000,-</h4><ul><li>9GB RAM</li><li>300% CPU</li><li>9GB DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL BASIC 9" data-harga="9000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="600"><span class="advanced">Recommend</span><h3>PREMIUM 1</h3><h4><sup>Rp</sup>10.000,-</h4><ul><li>UNLIMITED RAM</li><li>UNLIMITED CPU</li><li>UNLIMITED DISK</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL PREMIUM 1" data-harga="10000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 2</h3><h4><sup>Rp</sup>15.000,-</h4><ul><li>RESELLER PANEL</li><li>BISA OPEN JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL PREMIUM 2" data-harga="15000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 3</h3><h4><sup>Rp</sup>20.000,-</h4><ul><li>ADMIN PANEL</li><li>BISA OPEN RESELLER PANEL</li><li>BISA JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL PREMIUM 3" data-harga="20000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 4</h3><h4><sup>Rp</sup>25.000,-</h4><ul><li>OWNER PANEL</li><li>BISA OPEN ADMIN PANEL</li><li>BISA OPEN RESELLER PANEL</li><li>BISA JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL PREMIUM 4" data-harga="25000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="500"><span class="advanced">Recommend</span><h3>PREMIUM 5</h3><h4><sup>Rp</sup>35.000,-</h4><ul><li>PT PANEL</li><li>BISA OPEN OWNER PANEL</li><li>BISA OPEN ADMIN PANEL</li><li>BISA OPEN RESELLER PANEL</li><li>BISA JUAL PANEL</li><li>AUTO BALIK MODAL</li></ul><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="PANEL PREMIUM 5" data-harga="35000">BELI</a></div></div></div>
            </div>
          </div>
          <div class="container mt-4">
            <div class="section-title" data-aos="fade-up"><center><p>JUAL LAINNYA</p></center></div>
            <div class="row" data-aos="fade-left">
-             <div class="col-lg-3 col-md-6"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>JASA INSTALL PANEL</h3><h4><sup>Rp</sup>10.000,-</h4><div class="btn-wrap"><a href="pembayaran.html?produk=JASA%20INSTALL%20PANEL&harga=10000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASH+TOKEN INSTALL PANEL</h3><h4><sup>Rp</sup>15.000,-</h4><div class="btn-wrap"><a href="pembayaran.html?produk=BASH%2BTOKEN%20INSTALL&harga=15000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>JASA RENAME SC</h3><h4><sup>Rp</sup>20.000,-</h4><div class="btn-wrap"><a href="pembayaran.html?produk=JASA%20RENAME%20SC&harga=20000" class="btn-buy">BELI</a></div></div></div>
-             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>JASA BUAT WEBSITE</h3><h4><sup>Rp</sup>30.000,-</h4><div class="btn-wrap"><a href="pembayaran.html?produk=JASA%20BUAT%20WEBSITE&harga=30000" class="btn-buy">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>JASA INSTALL PANEL</h3><h4><sup>Rp</sup>10.000,-</h4><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="JASA INSTALL PANEL" data-harga="10000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>BASH+TOKEN INSTALL PANEL</h3><h4><sup>Rp</sup>15.000,-</h4><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="BASH+TOKEN INSTALL" data-harga="15000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>JASA RENAME SC</h3><h4><sup>Rp</sup>20.000,-</h4><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="JASA RENAME SC" data-harga="20000">BELI</a></div></div></div>
+             <div class="col-lg-3 col-md-6 mt-4 mt-md-0"><div class="box featured" data-aos="zoom-in" data-aos-delay="100"><h3>JASA BUAT WEBSITE</h3><h4><sup>Rp</sup>30.000,-</h4><div class="btn-wrap"><a class="btn-buy btn-buy-qris" data-produk="JASA BUAT WEBSITE" data-harga="30000">BELI</a></div></div></div>
            </div>
          </div>
        </section>
@@ -96,6 +111,33 @@
        <div class="footer-top"><div class="container"><div class="row"><div class="col-lg-4 col-md-6"><div class="footer-info"><h3>ALFA HOSTING</h3><p class="pb-3"><em></em></p><p>Jawa tengah,<br>Indonesian<br><br><strong>Phone:</strong> +62 822-2676-9163<br><strong>Email:</strong> sanzbot938@gmail.com<br></p></div></div><div class="col-lg-4 col-md-6 footer-newsletter"><h4>TERIMA KASIH</h4><p>TERIMAKASIH SUDAH MAMPIR KE WEBSITE SAYA JANGAN LUPA DI ORDER YA</p></div></div></div></div><div class="container"><div class="copyright">&copy; Copyright <strong><span>ALFA HOSTING </span></strong>. All Rights Reserved</div><div class="credits">Designed by <a href="https://wa.me/6282226769163">ALFA HOSTING</a></div></div>
    </footer>
  
+   <!-- MODAL PEMBAYARAN QRIS (JENDELA POP-UP) -->
+   <div id="qrisModal" class="payment-modal">
+     <div class="payment-container">
+        <!-- Tampilan Awal: Konfirmasi -->
+        <div id="konfirmasiArea">
+            <h2>Konfirmasi Pembelian</h2>
+            <div id="detailProduk"></div>
+            <button id="lanjutBayarBtn" class="btn-modal">Lanjut ke Pembayaran</button>
+            <button class="btn-modal batal">Batalkan</button>
+        </div>
+        <!-- Tampilan QRIS -->
+        <div id="qrisArea" class="hidden">
+            <h2>💫 Scan QRIS untuk Membayar</h2>
+            <img id="qrisImage" alt="QRIS" />
+            <div id="paymentInfo"></div>
+            <button class="btn-modal batal">❌ Batalkan</button>
+        </div>
+        <!-- Tampilan Sukses -->
+        <div id="suksesArea" class="hidden">
+            <h2>✅ Pembayaran Berhasil</h2>
+            <div id="suksesInfo"></div>
+            <button id="kirimBuktiBtn" class="btn-modal whatsapp">Kirim Bukti ke Admin</button>
+            <button class="btn-modal batal">Tutup</button>
+        </div>
+     </div>
+   </div>
+
    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i></a>
    <div id="preloader"></div>
    
@@ -109,5 +151,38 @@
    <script src="https://api.zeeoneofc.my.id/js/main.min.js"></script>
    <script src="https://api.zeeoneofc.my.id/js/dashboard.js"></script>
    <script src="https://kit.fontawesome.com/32db8fe470.js" crossorigin="anonymous"></script>
- </body>
-</html>
+
+   <!-- SEMUA KODE JAVASCRIPT ADA DI SINI -->
+   <script>
+       // --- PENGATURAN ---
+       const SETTINGS = {
+         QRIS: {
+           apikey: "alfa2025", 
+           merchantId: "OK2385395", 
+           keyorkut: "184646517465972242385395OKCTB1BFD496F29624C01FF8E5728CF69A17",
+           qrisCode: "00020101021126670016COM.NOBUBANK.WWW01189360050300000879140214140263240266770303UMI51440014ID.CO.QRIS.WWW0215ID20253948029410303UMI5204481253033605802ID5919ANDI CALL OK23853956005BLORA61055821162070703A0163044FEE"
+         },
+         CHECK_INTERVAL_MS: 5000,
+         NOMOR_ADMIN_WA: "6282226769163"
+       };
+
+       let pembayaranAktif = { status: false, amount: 0, transactionId: null, produk: null, interval: null, isPaid: false };
+
+       // --- Manajemen Modal ---
+       const modal = document.getElementById('qrisModal');
+       const semuaTombolBeli = document.querySelectorAll('.btn-buy-qris');
+       const tombolBatal = modal.querySelectorAll('.batal');
+
+       semuaTombolBeli.forEach(tombol => {
+         tombol.onclick = (e) => {
+           e.preventDefault();
+           const produk = tombol.getAttribute('data-produk');
+           const harga = parseInt(tombol.getAttribute('data-harga'));
+           
+           pembayaranAktif.produk = produk;
+           pembayaranAktif.amount = harga;
+           pembayaranAktif.isPaid = false; // Reset status pembayaran
+
+           document.getElementById('detailProduk').innerHTML = `<p style="font-size:1.1em;"><strong>Produk:</strong><br>${produk}</p><h3 style="margin-top: 20px;">Harga: Rp ${harga.toLocaleString('id-ID')}</h3>`;
+           tampilkanArea('konfirmasiArea');
+           modal.style.display = "fle
