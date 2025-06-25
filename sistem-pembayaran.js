@@ -5,6 +5,8 @@
 // valid dari proyek Anda yang lain, dan memasangnya di sini. Ini adalah 
 // perubahan paling penting yang menyelesaikan error "Gagal membuat pembayaran".
 //
+ 
+// --- PENGATURAN ---
 const SETTINGS = {
   QRIS: {
     apikey: "alfa2025", 
@@ -15,17 +17,29 @@ const SETTINGS = {
   CHECK_INTERVAL_MS: 5000,
   NOMOR_ADMIN_WA: "6282226769163"
 };
-// =================================================================================
-//                     AKHIR BAGIAN YANG DIUBAH
-// =================================================================================
 
-
-// --- KODE APLIKASI (SESUAI DENGAN WEBSITE PRODUK ANDA) ---
 let pembayaranAktif = { status: false, amount: 0, transactionId: null, produk: null, interval: null, isPaid: false };
 
+// --- Manajemen Modal ---
 const modal = document.getElementById('qrisModal');
 const semuaTombolBeli = document.querySelectorAll('.btn-buy-qris');
 const tombolBatal = modal.querySelectorAll('.batal');
+
+
+// =======================================================================
+//                    👇👇👇 PERBAIKAN TERAKHIR ADA DI SINI 👇👇👇
+// =======================================================================
+// Baris ini akan berjalan segera setelah halaman dimuat, dan secara paksa
+// menyembunyikan modal, mengalahkan skrip atau CSS lain yang mungkin berjalan.
+document.addEventListener('DOMContentLoaded', () => {
+  if(modal) {
+    modal.style.display = 'none';
+  }
+});
+// =======================================================================
+//                  👆👆👆 AKHIR BAGIAN PERBAIKAN 👆👆👆
+// =======================================================================
+
 
 semuaTombolBeli.forEach(tombol => {
   tombol.onclick = (e) => {
