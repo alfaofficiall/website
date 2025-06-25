@@ -1,33 +1,26 @@
 // Memanggil semua library yang dibutuhkan
 const express = require('express');
-const cors = require('cors'); // Untuk memberikan izin CORS
 const fetch = require('node-fetch'); // Untuk mengambil gambar di proxy
 const { URL } = require('url'); // Untuk keamanan di proxy
 
 // Membuat aplikasi express
 const app = express();
 
-// --- INI BAGIAN PENTING UNTUK MEMBERI IZIN KE WEBSITE ANDA ---
-// Menggunakan 'cors' sebagai middleware. Ini akan mengizinkan semua permintaan
-// dari domain manapun, menyelesaikan masalah "Permintaan Lintas Asal Diblokir".
-app.use(cors());
 
-
-// --- RUTE API ANDA ---
+// --- RUTE API ANDA DENGAN PERBAIKAN CORS MANUAL DI DALAMNYA ---
 
 // Rute untuk membuat pembayaran (createpayment)
-// Ini adalah logika utama Anda, tidak ada yang diubah
 app.get('/orderkuota/createpayment', (req, res) => {
-    // Di sini seharusnya ada logika Anda untuk memanggil
-    // penyedia layanan QRIS dan mendapatkan hasilnya.
-    // Untuk contoh, kita akan kirimkan data dummy yang mirip.
-    // GANTI INI DENGAN LOGIKA ASLI ANDA
+    // --- HEADER CORS MANUAL DITAMBAHKAN DI SINI ---
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Logika asli Anda untuk membuat pembayaran
     const { apikey, amount, codeqr } = req.query;
     if (!apikey || !amount || !codeqr) {
         return res.status(400).json({ status: false, message: "Parameter tidak lengkap." });
     }
     
-    // Data dummy yang meniru respons asli Anda
+    // Ini adalah contoh respons sukses. Pastikan logika asli Anda berjalan
     const responseSukses = {
         status: true,
         creator: "ALFA OFFICIA",
@@ -44,8 +37,10 @@ app.get('/orderkuota/createpayment', (req, res) => {
 });
 
 // Rute untuk mengecek status pembayaran (cekstatus)
-// Ini adalah logika utama Anda, tidak ada yang diubah
 app.get('/orderkuota/cekstatus', (req, res) => {
+    // --- HEADER CORS MANUAL DITAMBAHKAN DI SINI ---
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
     // Logika Anda untuk mengecek status
     const { apikey, merchant, keyorkut } = req.query;
     // ...logika Anda...
@@ -53,35 +48,38 @@ app.get('/orderkuota/cekstatus', (req, res) => {
 });
 
 
-// Rute untuk proxy gambar, untuk menghindari CORS dari server gambar
+// Rute untuk proxy gambar
 app.get('/api/qris-proxy', async (req, res) => {
-  try {
-    const imageUrl = req.query.url;
-    if (!imageUrl) {
-      return res.status(400).send('Parameter URL gambar tidak ditemukan.');
+    // --- HEADER CORS MANUAL DITAMBAHKAN DI SINI ---
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  
+    try {
+        const imageUrl = req.query.url;
+        if (!imageUrl) {
+            return res.status(400).send('Parameter URL gambar tidak ditemukan.');
+        }
+
+        const allowedHostnames = ['img1.pixhost.to', 'i.pxhost.to', 'imqi.pxhost.to'];
+        const parsedUrl = new URL(imageUrl);
+        if (!allowedHostnames.includes(parsedUrl.hostname)) {
+            return res.status(403).send('Akses ke domain ini tidak diizinkan oleh proxy.');
+        }
+
+        const imageResponse = await fetch(imageUrl);
+        if (!imageResponse.ok) {
+            throw new Error(`Gagal mengambil gambar: ${imageResponse.statusText}`);
+        }
+
+        const contentType = imageResponse.headers.get('content-type');
+        res.setHeader('Content-Type', contentType);
+        imageResponse.body.pipe(res);
+
+    } catch (error) {
+        console.error('Error di proxy gambar:', error);
+        res.status(500).send('Terjadi kesalahan saat memproses gambar.');
     }
-
-    const allowedHostnames = ['img1.pixhost.to', 'i.pxhost.to', 'imqi.pxhost.to'];
-    const parsedUrl = new URL(imageUrl);
-    if (!allowedHostnames.includes(parsedUrl.hostname)) {
-        return res.status(403).send('Akses ke domain ini tidak diizinkan oleh proxy.');
-    }
-
-    const imageResponse = await fetch(imageUrl);
-    if (!imageResponse.ok) {
-      throw new Error(`Gagal mengambil gambar: ${imageResponse.statusText}`);
-    }
-
-    const contentType = imageResponse.headers.get('content-type');
-    res.setHeader('Content-Type', contentType);
-    imageResponse.body.pipe(res);
-
-  } catch (error) {
-    console.error('Error di proxy gambar:', error);
-    res.status(500).send('Terjadi kesalahan saat memproses gambar.');
-  }
 });
 
 
-// Mengekspor aplikasi agar Vercel bisa menjalankannya
+// Mengekspor aplikasi agar Vercel bisa menjalankannya dengan benar
 module.exports = app;
