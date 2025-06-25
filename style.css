@@ -1,98 +1,15 @@
 /* Style untuk Modal Pembayaran QRIS */
-.qris-modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding-top: 50px;
-}
-
-.qris-modal-content {
-  background-color: #1a1a1a;
-  color: #fff;
-  margin: 5% auto;
-  padding: 25px;
-  border: 1px solid #444;
-  width: 90%;
-  max-width: 420px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-  font-family: "Poppins", sans-serif;
-}
-
-.qris-modal-content h2, .qris-modal-content h3 {
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.qris-modal-content .btn-modal {
-  background: #0d6efd;
-  border: 0;
-  padding: 12px 24px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 50px;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.qris-modal-content .btn-modal:hover {
-  background: #0b5ed7;
-}
-
-.qris-modal-content .btn-modal.batal {
-  background: #6c757d;
-}
-
-.qris-modal-content .btn-modal.batal:hover {
-  background: #5c636a;
-}
-
-.qris-modal-content .btn-modal.whatsapp {
-  background: #25D366;
-}
-
-.qris-modal-content .btn-modal.whatsapp:hover {
-  background: #1da851;
-}
-
-#qrisImage {
-  max-width: 80%;
-  height: auto;
-  margin: 20px 0;
-  border-radius: 8px;
-  background-color: white;
-  padding: 5px;
-}
-
-#paymentInfo,
-#suksesInfo,
-#detailProduk {
-  text-align: left;
-  line-height: 1.9;
-  margin: 20px 0;
-  font-size: 15px;
-}
-
-#loadingText {
-    font-style: italic;
-    color: #aaa;
-    padding: 40px 0;
-}
-
-.hidden {
-  display: none;
-}
-
-.btn-buy-qris {
-  cursor: pointer;
-}
+.qris-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); padding-top: 50px; }
+.qris-modal-content { background-color: #1a1a1a; color: #fff; margin: 5% auto; padding: 25px; border: 1px solid #444; width: 90%; max-width: 420px; border-radius: 10px; text-align: center; box-shadow: 0 5px 25px rgba(0,0,0,0.5); font-family: "Poppins", sans-serif; }
+.qris-modal-content h2, .qris-modal-content h3 { font-weight: 700; margin-bottom: 15px; }
+.qris-modal-content .btn-modal { background: #0d6efd; border: 0; padding: 12px 24px; color: #fff; transition: 0.4s; border-radius: 50px; cursor: pointer; width: 100%; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; }
+.qris-modal-content .btn-modal:hover { background: #0b5ed7; }
+.qris-modal-content .btn-modal.batal { background: #6c757d; }
+.qris-modal-content .btn-modal.batal:hover { background: #5c636a; }
+.qris-modal-content .btn-modal.whatsapp { background: #25D366; }
+.qris-modal-content .btn-modal.whatsapp:hover { background: #1da851; }
+#qrisImage { max-width: 80%; height: auto; margin: 20px 0; border-radius: 8px; background-color: white; padding: 5px; }
+#paymentInfo, #suksesInfo, #detailProduk { text-align: left; line-height: 1.9; margin: 20px 0; font-size: 15px; }
+#loadingText { font-style: italic; color: #aaa; padding: 40px 0; }
+.hidden { display: none; }
+.btn-buy-qris { cursor: pointer; }
