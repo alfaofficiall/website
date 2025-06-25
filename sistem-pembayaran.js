@@ -1,11 +1,3 @@
-// =================================================================================
-//           BAGIAN YANG DIUBAH AGAR SESUAI DENGAN WEBSITE PAYMENT ANDA
-// =================================================================================
-// Kami mengambil 'kunci' atau 'voucher' (apikey & qrisCode) yang sudah terbukti 
-// valid dari proyek Anda yang lain, dan memasangnya di sini. Ini adalah 
-// perubahan paling penting yang menyelesaikan error "Gagal membuat pembayaran".
-//
- 
 // --- PENGATURAN ---
 const SETTINGS = {
   QRIS: {
@@ -25,21 +17,12 @@ const modal = document.getElementById('qrisModal');
 const semuaTombolBeli = document.querySelectorAll('.btn-buy-qris');
 const tombolBatal = modal.querySelectorAll('.batal');
 
-
-// =======================================================================
-//                    👇👇👇 PERBAIKAN TERAKHIR ADA DI SINI 👇👇👇
-// =======================================================================
-// Baris ini akan berjalan segera setelah halaman dimuat, dan secara paksa
-// menyembunyikan modal, mengalahkan skrip atau CSS lain yang mungkin berjalan.
+// Sembunyikan modal di awal untuk menghindari bug tampilan
 document.addEventListener('DOMContentLoaded', () => {
   if(modal) {
     modal.style.display = 'none';
   }
 });
-// =======================================================================
-//                  👆👆👆 AKHIR BAGIAN PERBAIKAN 👆👆👆
-// =======================================================================
-
 
 semuaTombolBeli.forEach(tombol => {
   tombol.onclick = (e) => {
@@ -70,6 +53,7 @@ function tampilkanArea(namaArea) {
     document.getElementById(namaArea).classList.remove('hidden');
 }
 
+// --- Logika Pembayaran ---
 document.getElementById('lanjutBayarBtn').onclick = async function () {
   tampilkanArea('qrisArea');
   document.getElementById('loadingText').classList.remove('hidden');
@@ -95,12 +79,23 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
     
     document.getElementById('loadingText').classList.add('hidden');
 
+    // MENGGUNAKAN PROXY UNTUK MENAMPILKAN GAMBAR DENGAN AMAN
     const qrisImageElement = document.getElementById("qrisImage");
-    qrisImageElement.src = data.imageqris.url;
+    const imageUrlAsli = data.imageqris.url;
+    const proxyImageUrl = `/api/qris-proxy?url=${encodeURIComponent(imageUrlAsli)}`;
+    qrisImageElement.src = proxyImageUrl;
     
-    qrisImageElement.style.display = 'block';
-    document.getElementById('paymentInfo').classList.remove('hidden');
-
+    qrisImageElement.onload = () => {
+        qrisImageElement.style.display = 'block';
+        document.getElementById('paymentInfo').classList.remove('hidden');
+    };
+    
+    qrisImageElement.onerror = () => {
+        console.error("Gagal memuat gambar via proxy. Pastikan endpoint /api/qris-proxy ada di backend dan berfungsi.");
+        document.getElementById('loadingText').classList.remove('hidden');
+        document.getElementById('loadingText').innerHTML = 'Gagal memuat gambar QRIS.';
+    };
+    
     document.getElementById("paymentInfo").innerHTML = `<strong>Produk:</strong> ${pembayaranAktif.produk}<br><strong>ID Transaksi:</strong> ${data.idtransaksi}<br><strong>Jumlah:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}`;
     
     pembayaranAktif.interval = setInterval(cekStatusPembayaran, SETTINGS.CHECK_INTERVAL_MS);
@@ -111,6 +106,7 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
   }
 };
 
+// --- LOGIKA CEK STATUS PEMBAYARAN ---
 async function cekStatusPembayaran() {
   if (!pembayaranAktif.status || pembayaranAktif.isPaid) {
       return clearInterval(pembayaranAktif.interval);
