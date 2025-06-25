@@ -63,7 +63,16 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
     pembayaranAktif.transactionId = data.idtransaksi;
     
     document.getElementById('loadingText').classList.add('hidden');
-    document.getElementById("qrisImage").src = data.imageqris.url;
+
+    // === PERUBAHAN PENTING DI SINI ===
+    // URL asli dari API QRIS
+    const imageUrlAsli = data.imageqris.url;
+    // URL baru yang mengarah ke proxy di server Anda sendiri
+    // Pastikan path-nya benar, contoh: '/api/qris-proxy.php' jika pakai PHP
+    const proxyImageUrl = `/api/qris-proxy?url=${encodeURIComponent(imageUrlAsli)}`;
+    document.getElementById("qrisImage").src = proxyImageUrl;
+    // === AKHIR PERUBAHAN ===
+    
     document.getElementById("paymentInfo").innerHTML = `<strong>Produk:</strong> ${pembayaranAktif.produk}<br><strong>ID Transaksi:</strong> ${data.idtransaksi}<br><strong>Jumlah:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}`;
     document.getElementById('qrisImage').classList.remove('hidden');
     document.getElementById('paymentInfo').classList.remove('hidden');
@@ -81,19 +90,17 @@ async function cekStatusPembayaran() {
   if (!pembayaranAktif.status || pembayaranAktif.isPaid) return clearInterval(pembayaranAktif.interval);
 
   const { apikey, merchantId, keyorkut } = SETTINGS.QRIS;
-  // URL ini tidak memerlukan ID transaksi, persis seperti bot Anda
   const apiUrl = `https://alfaofficial.cloud/orderkuota/cekstatus?apikey=${apikey}&merchant=${merchantId}&keyorkut=${keyorkut}`;
 
   try {
     const res = await fetch(apiUrl);
     const json = await res.json();
     
-    // Mengecek dengan cara mencocokkan JUMLAH UANG
     if (json?.result && json.result.amount == pembayaranAktif.amount) {
       if (pembayaranAktif.status && !pembayaranAktif.isPaid) {
           console.log("Transaksi dengan jumlah yang cocok ditemukan! Menganggap pembayaran berhasil.");
           
-          pembayaranAktif.isPaid = true; // Tandai sudah lunas agar tidak dicek lagi
+          pembayaranAktif.isPaid = true; 
           pembayaranAktif.status = false;
           clearInterval(pembayaranAktif.interval);
           
