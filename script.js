@@ -1,8 +1,11 @@
-// PENGATURAN
-const NOMOR_ADMIN_WA = "6282226769163";
+// --- PENGATURAN ---
+const SETTINGS = {
+  NOMOR_ADMIN_WA: "6282226769163"
+};
+
 let pembayaranAktif = { status: false, amount: 0, transactionId: null, produk: null, interval: null };
 
-// MANAJEMEN MODAL
+// --- Manajemen Modal ---
 const modal = document.getElementById('qrisModal');
 const semuaTombolBeli = document.querySelectorAll('.btn-buy-qris');
 const tombolBatal = modal.querySelectorAll('.batal');
@@ -28,14 +31,13 @@ function tampilkanArea(namaArea) {
     document.getElementById(namaArea).classList.remove('hidden');
 }
 
-// LOGIKA PEMBAYARAN
+// --- Logika Pembayaran ---
 document.getElementById('lanjutBayarBtn').onclick = async function () {
   tampilkanArea('qrisArea');
   document.getElementById('loadingText').classList.remove('hidden');
   document.getElementById('qrisImage').classList.add('hidden');
   document.getElementById('paymentInfo').classList.add('hidden');
 
-  // INI BAGIAN PENTING YANG DIUBAH UNTUK MENGATASI CORS
   const apiUrl = `/api/proxy-create-payment.php?amount=${pembayaranAktif.amount}`;
 
   try {
@@ -78,7 +80,7 @@ async function cekStatusPembayaran() {
       document.getElementById("suksesInfo").innerHTML = `<strong>Produk:</strong> ${pembayaranAktif.produk}<br><strong>ID Transaksi:</strong> ${pembayaranAktif.transactionId}<br><strong>Jumlah Dibayar:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}`;
 
       const pesanWA = `Halo Admin, saya telah berhasil melakukan pembayaran untuk:\n\nProduk: *${pembayaranAktif.produk}*\nID Transaksi: *${pembayaranAktif.transactionId}*\nJumlah: *Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}*\n\nMohon untuk segera diproses. Terima kasih.`;
-      const urlWA = `https://wa.me/${NOMOR_ADMIN_WA}?text=${encodeURIComponent(pesanWA)}`;
+      const urlWA = `https://wa.me/${SETTINGS.NOMOR_ADMIN_WA}?text=${encodeURIComponent(pesanWA)}`;
       document.getElementById('kirimBuktiBtn').onclick = () => window.open(urlWA, '_blank');
     } else {
       console.log("Menunggu pembayaran...");
