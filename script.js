@@ -53,7 +53,9 @@ function tampilkanArea(namaArea) {
 // --- Logika Pembayaran ---
 document.getElementById('lanjutBayarBtn').onclick = async function () {
   tampilkanArea('qrisArea');
-  document.getElementById('paymentInfo').innerHTML = 'Membuat permintaan pembayaran...';
+  document.getElementById('loadingText').classList.remove('hidden');
+  document.getElementById('qrisImage').classList.add('hidden');
+  document.getElementById('paymentInfo').classList.add('hidden');
 
   const { apikey, qrisCode } = SETTINGS.QRIS;
   const apiUrl = `https://alfaofficial.cloud/orderkuota/createpayment?apikey=${apikey}&amount=${pembayaranAktif.amount}&codeqr=${qrisCode}`;
@@ -69,18 +71,21 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
     const data = json.result;
     pembayaranAktif.status = true;
     pembayaranAktif.transactionId = data.idtransaksi;
-
+    
+    document.getElementById('loadingText').classList.add('hidden');
     document.getElementById("qrisImage").src = data.imageqris.url;
     document.getElementById("paymentInfo").innerHTML = `
       <strong>Produk:</strong> ${pembayaranAktif.produk}<br>
       <strong>ID Transaksi:</strong> ${data.idtransaksi}<br>
       <strong>Jumlah:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}
     `;
+    document.getElementById('qrisImage').classList.remove('hidden');
+    document.getElementById('paymentInfo').classList.remove('hidden');
     
     pembayaranAktif.interval = setInterval(cekStatusPembayaran, SETTINGS.CHECK_INTERVAL_MS);
   } catch (err) {
     console.error("Error saat membuat pembayaran:", err);
-    document.getElementById('paymentInfo').innerHTML = 'Gagal membuat pembayaran. Silakan coba lagi.';
+    document.getElementById('loadingText').innerHTML = 'Gagal membuat pembayaran. Silakan coba lagi.';
     setTimeout(tutupModal, 3000);
   }
 };
