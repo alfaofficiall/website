@@ -1,4 +1,4 @@
-// --- PENGATURAN ---
+  // --- PENGATURAN ---
 const SETTINGS = {
   NOMOR_ADMIN_WA: "6282226769163"
 };
@@ -13,33 +13,21 @@ const tombolBatal = modal.querySelectorAll('.batal');
 semuaTombolBeli.forEach(tombol => {
   tombol.onclick = (e) => {
     e.preventDefault();
-    const produk = tombol.getAttribute('data-produk');
-    const harga = parseInt(tombol.getAttribute('data-harga'));
-    
-    pembayaranAktif.produk = produk;
-    pembayaranAktif.amount = harga;
-
-    document.getElementById('detailProduk').innerHTML = `
-        <p style="font-size:1.1em;"><strong>Produk:</strong><br>${produk}</p>
-        <h3 style="margin-top: 20px;">Harga: Rp ${harga.toLocaleString('id-ID')}</h3>
-    `;
+    pembayaranAktif.produk = tombol.getAttribute('data-produk');
+    pembayaranAktif.amount = parseInt(tombol.getAttribute('data-harga'));
+    document.getElementById('detailProduk').innerHTML = `<p style="font-size:1.1em;"><strong>Produk:</strong><br>${pembayaranAktif.produk}</p><h3 style="margin-top: 20px;">Harga: Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}</h3>`;
     tampilkanArea('konfirmasiArea');
     modal.style.display = "block";
   };
 });
-
 tombolBatal.forEach(tombol => tombol.onclick = tutupModal);
-
 function tutupModal() {
     modal.style.display = "none";
     if (pembayaranAktif.interval) clearInterval(pembayaranAktif.interval);
     pembayaranAktif.status = false;
 }
-
 function tampilkanArea(namaArea) {
-    ['konfirmasiArea', 'qrisArea', 'suksesArea'].forEach(id => {
-        document.getElementById(id).classList.add('hidden');
-    });
+    ['konfirmasiArea', 'qrisArea', 'suksesArea'].forEach(id => { document.getElementById(id).classList.add('hidden'); });
     document.getElementById(namaArea).classList.remove('hidden');
 }
 
@@ -50,45 +38,37 @@ document.getElementById('lanjutBayarBtn').onclick = async function () {
   document.getElementById('qrisImage').classList.add('hidden');
   document.getElementById('paymentInfo').classList.add('hidden');
 
-  // INI BAGIAN PENTING YANG DIUBAH UNTUK MENGATASI CORS
-  // Kita memanggil file backend JAVASCRIPT, BUKAN PHP
-  const apiUrl = `/api/create-payment?amount=${pembayaranAktif.amount}`;
+  // PENTING: URL ini memanggil file "jembatan" backend Anda
+  const apiUrl = `/api/create-payment.js?amount=${pembayaranAktif.amount}`;
 
   try {
     const res = await fetch(apiUrl);
     const json = await res.json();
-
-    if (!json?.result?.idtransaksi || !json?.result?.imageqris?.url) {
-      throw new Error('Respons API dari proxy tidak lengkap.');
-    }
-
+    if (!json?.result?.idtransaksi || !json?.result?.imageqris?.url) throw new Error('Respons API dari proxy tidak lengkap.');
+    
     const data = json.result;
     pembayaranAktif.status = true;
     pembayaranAktif.transactionId = data.idtransaksi;
     
     document.getElementById('loadingText').classList.add('hidden');
     document.getElementById("qrisImage").src = data.imageqris.url;
-    document.getElementById("paymentInfo").innerHTML = `
-      <strong>Produk:</strong> ${pembayaranAktif.produk}<br>
-      <strong>ID Transaksi:</strong> ${data.idtransaksi}<br>
-      <strong>Jumlah:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}
-    `;
+    document.getElementById("paymentInfo").innerHTML = `<strong>Produk:</strong> ${pembayaranAktif.produk}<br><strong>ID Transaksi:</strong> ${data.idtransaksi}<br><strong>Jumlah:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}`;
     document.getElementById('qrisImage').classList.remove('hidden');
     document.getElementById('paymentInfo').classList.remove('hidden');
     
     pembayaranAktif.interval = setInterval(cekStatusPembayaran, 5000);
   } catch (err) {
     console.error("Error:", err);
-    document.getElementById('loadingText').innerHTML = 'Gagal membuat pembayaran.';
-    setTimeout(tutupModal, 3000);
+    document.getElementById('loadingText').innerHTML = 'Gagal membuat pembayaran. Cek konsol (F12) untuk error.';
+    setTimeout(tutupModal, 4000);
   }
 };
 
 async function cekStatusPembayaran() {
   if (!pembayaranAktif.status) return clearInterval(pembayaranAktif.interval);
 
-  // PENTING: URL ini juga memanggil file backend JAVASCRIPT
-  const apiUrl = `/api/check-status?idtransaksi=${pembayaranAktif.transactionId}`;
+  // PENTING: URL ini juga memanggil file "jembatan" backend Anda
+  const apiUrl = `/api/check-status.js?idtransaksi=${pembayaranAktif.transactionId}`;
 
   try {
     const res = await fetch(apiUrl);
@@ -99,11 +79,7 @@ async function cekStatusPembayaran() {
       clearInterval(pembayaranAktif.interval);
       
       tampilkanArea('suksesArea');
-      document.getElementById("suksesInfo").innerHTML = `
-        <strong>Produk:</strong> ${pembayaranAktif.produk}<br>
-        <strong>ID Transaksi:</strong> ${pembayaranAktif.transactionId}<br>
-        <strong>Jumlah Dibayar:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}
-      `;
+      document.getElementById("suksesInfo").innerHTML = `<strong>Produk:</strong> ${pembayaranAktif.produk}<br><strong>ID Transaksi:</strong> ${pembayaranAktif.transactionId}<br><strong>Jumlah Dibayar:</strong> Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}`;
 
       const pesanWA = `Halo Admin, saya telah berhasil melakukan pembayaran untuk:\n\nProduk: *${pembayaranAktif.produk}*\nID Transaksi: *${pembayaranAktif.transactionId}*\nJumlah: *Rp ${pembayaranAktif.amount.toLocaleString('id-ID')}*\n\nMohon untuk segera diproses. Terima kasih.`;
       const urlWA = `https://wa.me/${SETTINGS.NOMOR_ADMIN_WA}?text=${encodeURIComponent(pesanWA)}`;
